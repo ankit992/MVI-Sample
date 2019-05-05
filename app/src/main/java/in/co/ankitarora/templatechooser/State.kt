@@ -6,5 +6,5 @@ import io.reactivex.Observable
 
 data class State(val currentScreen:Screen = SplashScreen(),
                  val splashScreen: SplashScreen = SplashScreen(),
-                 val homeScreen: TemplateChooserScreen = TemplateChooserScreen(),
+                 val templateChooserScreen: TemplateChooserScreen = TemplateChooserScreen(),
                  val actions: Observable<Action> = Observable.fromIterable(emptyList<Action>()))

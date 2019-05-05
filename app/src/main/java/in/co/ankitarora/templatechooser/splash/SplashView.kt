@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.view_splash.view.*
 
 class SplashView: LinearLayout {
 
@@ -19,12 +20,14 @@ class SplashView: LinearLayout {
     fun eventsObservable(): Observable<SplashViewEvents> = events.hide().share()
 
     init{
+        android.view.LayoutInflater.from(context).inflate(R.layout.view_splash, this, true)
         this.layoutParams = LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        android.view.LayoutInflater.from(context).inflate(R.layout.view_splash, this, true)
-
+        button_template_chooser.setOnClickListener {
+            events.onNext(SplashViewEvents.NavigateToTemplateChooserScreen)
+        }
     }
 
 }

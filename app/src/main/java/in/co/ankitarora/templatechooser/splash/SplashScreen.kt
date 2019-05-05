@@ -4,6 +4,7 @@ import `in`.co.ankitarora.templatechooser.Event
 import `in`.co.ankitarora.templatechooser.Reducer
 import `in`.co.ankitarora.templatechooser.Screen
 import `in`.co.ankitarora.templatechooser.ViewUpdater
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import io.reactivex.Observable
@@ -15,7 +16,7 @@ class SplashScreen : Screen {
     override fun buildView(context: Context): View = SplashView(context).also {
         it.eventsObservable().subscribe { event ->
             when (event) {
-
+                is SplashViewEvents.NavigateToTemplateChooserScreen -> events.onNext(Event.NavigateToTemplateChooserScreen)
             }
         }
     }
@@ -25,6 +26,13 @@ class SplashScreen : Screen {
 
     override fun reducer(): Reducer = SplashReducer()
 
-    override fun updater(): ViewUpdater = SplashViewUpdater()
+    @SuppressLint("CheckResult")
+    override fun updater(): ViewUpdater {
+        val splashViewUpdater = SplashViewUpdater()
+        splashViewUpdater.eventsObservable().subscribe { event ->
+            events.onNext(event)
+        }
+        return splashViewUpdater
+    }
 
 }

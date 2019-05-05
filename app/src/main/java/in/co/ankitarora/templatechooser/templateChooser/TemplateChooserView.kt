@@ -1,7 +1,6 @@
 package `in`.co.ankitarora.templatechooser.templateChooser
 
 import `in`.co.ankitarora.templatechooser.R
-import `in`.co.ankitarora.templatechooser.splash.SplashViewEvents
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
@@ -15,9 +14,9 @@ class TemplateChooserView : LinearLayout {
     constructor(context: Context, attributes: AttributeSet?) : super(context, attributes)
 
 
-    private val events: PublishSubject<SplashViewEvents> = PublishSubject.create()
+    private val events: PublishSubject<TemplateChooserViewEvents> = PublishSubject.create()
 
-    fun eventsObservable(): Observable<SplashViewEvents> = events.hide().share()
+    fun eventsObservable(): Observable<TemplateChooserViewEvents> = events.hide().share()
 
     init{
         this.layoutParams = LayoutParams(
@@ -25,7 +24,7 @@ class TemplateChooserView : LinearLayout {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         android.view.LayoutInflater.from(context).inflate(R.layout.view_template_chooser, this, true)
-
+        events.onNext(TemplateChooserViewEvents.GetTemplateData)
     }
 
 }

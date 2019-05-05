@@ -1,5 +1,5 @@
 package `in`.co.ankitarora.templatechooser.splash
 
-class SplashViewEvents {
-
+sealed class SplashViewEvents {
+    object NavigateToTemplateChooserScreen : SplashViewEvents()
 }
