@@ -2,6 +2,7 @@ package `in`.co.ankitarora.templatechooser.templateChooser
 
 import `in`.co.ankitarora.templatechooser.R
 import android.content.Context
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -18,13 +19,15 @@ class TemplateChooserView : LinearLayout {
 
     fun eventsObservable(): Observable<TemplateChooserViewEvents> = events.hide().share()
 
-    init{
+    init {
         this.layoutParams = LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         android.view.LayoutInflater.from(context).inflate(R.layout.view_template_chooser, this, true)
-        events.onNext(TemplateChooserViewEvents.GetTemplateData)
+        Handler().postDelayed(
+            { events.onNext(TemplateChooserViewEvents.GetTemplateData) }, 200
+        )
     }
 
 }

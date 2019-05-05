@@ -1,15 +1,19 @@
 package `in`.co.ankitarora.templatechooser
 
+import `in`.co.ankitarora.templatechooser.kotlin_data.TemplateDetails
+import `in`.co.ankitarora.templatechooser.network.getAllTemplates
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RootView {
+    override fun getTemplatesData(): Observable<List<TemplateDetails>> = getAllTemplates()
+
     override fun showProgressBar() {
         in_progress.visibility = View.VISIBLE
     }

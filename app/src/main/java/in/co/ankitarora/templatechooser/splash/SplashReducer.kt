@@ -13,6 +13,7 @@ class SplashReducer : Reducer {
             is Event.NavigateToTemplateChooserScreen -> state.copy(
                 currentScreen = state.templateChooserScreen
             )
+            else -> state
         }
     }
 }
