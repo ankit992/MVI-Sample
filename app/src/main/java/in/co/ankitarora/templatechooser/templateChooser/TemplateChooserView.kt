@@ -37,21 +37,24 @@ class TemplateChooserView : LinearLayout, TemplateChooserViewInterface {
     override fun showTemplates(templateDetails: List<TemplateDetails>) {
         layout_retry.visibility = View.GONE
         templates_layout.visibility = View.VISIBLE
-        template_details_view_pager.adapter = TemplatesPagerAdapter(context, templateDetails)
+        template_details_view_pager.adapter = TemplatesPagerAdapter(context, templateDetails).also {
+            it.eventsObservable().subscribe { event ->
+                when (event) {
+                    is TemplateChooserViewEvents.VariantSelected -> updateBackgroundColor(event.variant)
+                }
+            }
+        }
+        template_details_view_pager.currentItem
         template_details_view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-            }
+            override fun onPageScrollStateChanged(state: Int) {}
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
-                if (templateDetails[position].variations[0].iconType == "color")
-                    updateBackgroundColor(templateDetails[position].variations[0].getIconColor())
+                updateBackgroundColor((template_details_view_pager.adapter as TemplatesPagerAdapter).getTemplatesConfigDataInPager()[position].selectedVariant)
             }
-
         })
-        if (templateDetails[0].variations[0].iconType.equals("color"))
+        if (templateDetails[0].variations[0].iconType == "color")
             updateBackgroundColor(templateDetails[0].variations[0].getIconColor())
     }
 

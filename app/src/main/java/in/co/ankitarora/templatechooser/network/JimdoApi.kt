@@ -51,18 +51,14 @@ fun getAllTemplates(): Observable<List<TemplateDetails>> {
                 )
             }
             val mutableListOfTemplates = mutableListOf<TemplateDetails>()
-            var counter = 0
             val resultObservable = Observable.merge(listOfTemplateObservables)
             resultObservable.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.from(Executors.newFixedThreadPool(40))).doOnError {
                 templatesObservable.onError(it)
             }.doOnComplete {
+                templatesObservable.onNext(mutableListOfTemplates.toList())
                 templatesObservable.onComplete()
             }.subscribe {
-                counter++;
                 mutableListOfTemplates.add(it)
-                if (counter == listOfTemplateObservables.size) {
-                    templatesObservable.onNext(mutableListOfTemplates.toList())
-                }
             }
         }
     return templatesObservable
