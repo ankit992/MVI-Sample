@@ -15,9 +15,9 @@ class RxSchedulerRule : TestRule {
         return object : Statement() {
             override fun evaluate() {
                 RxAndroidPlugins.reset()
-                RxAndroidPlugins.setMainThreadSchedulerHandler() { Schedulers.trampoline() }
-
                 RxJavaPlugins.reset()
+
+                RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
                 RxJavaPlugins.setComputationSchedulerHandler { (Schedulers.trampoline()) }
                 RxJavaPlugins.setComputationSchedulerHandler { (Schedulers.trampoline()) }
                 RxJavaPlugins.setNewThreadSchedulerHandler{ (Schedulers.trampoline()) }

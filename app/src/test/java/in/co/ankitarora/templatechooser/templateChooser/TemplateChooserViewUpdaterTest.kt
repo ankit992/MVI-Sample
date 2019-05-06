@@ -1,8 +1,12 @@
 package `in`.co.ankitarora.templatechooser.templateChooser
 
 import `in`.co.ankitarora.templatechooser.*
+import `in`.co.ankitarora.templatechooser.kotlin_data.TemplateDetails
 import android.view.View
 import io.reactivex.Observable
+import io.reactivex.observers.TestObserver
+import io.reactivex.subjects.PublishSubject
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -11,11 +15,10 @@ import org.mockito.Mockito
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
 class TemplateChooserViewUpdaterTest{
-    @get:Rule
-    val schedulerRule = RxSchedulerRule()
 
     private fun viewUpdater(): TemplateChooserViewUpdater = TemplateChooserViewUpdater()
 
@@ -70,10 +73,35 @@ class TemplateChooserViewUpdaterTest{
         val mockRootView = rootView()
         val viewUpdater = viewUpdater()
         val mockCurrentView = Mockito.mock(TestView::class.java)
+        val testObserver = PublishSubject.create<List<TemplateDetails>>()
+        Mockito.`when`(mockRootView.getTemplatesData()).thenReturn(testObserver)
         Mockito.`when`(mockRootView.currentView()).thenReturn(mockCurrentView)
         val state = State(currentScreen = TemplateChooserScreen(), actions = Observable.just(Action.GetTemplatesData))
         viewUpdater.update(state,mockRootView)
         Mockito.verify(mockRootView).showProgressBar()
         Mockito.verify(mockRootView).getTemplatesData()
+
+        Observable.create<Event> { emitter ->
+            viewUpdater.eventsObservable().subscribe { event ->
+                emitter.onNext(event)
+                emitter.onComplete()
+            }
+            testObserver.onNext(listOf())
+        }.timeout(5, TimeUnit.SECONDS).blockingFirst()
+            .let {
+                assertEquals(it,Event.TemplateDataLoaded(listOf()))
+            }
+
+        Observable.create<Event> { emitter ->
+            viewUpdater.eventsObservable().subscribe { event ->
+                emitter.onNext(event)
+                emitter.onComplete()
+            }
+            testObserver.onError(IndexOutOfBoundsException())
+        }.timeout(5, TimeUnit.SECONDS).blockingFirst()
+            .let {
+                assertEquals(it,Event.OnTemplateLoadError)
+            }
+
     }
 }

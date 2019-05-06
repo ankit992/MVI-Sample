@@ -15,9 +15,6 @@ import org.robolectric.RuntimeEnvironment
 @RunWith(RobolectricTestRunner::class)
 class SplashViewUpdaterTest{
 
-    @get:Rule
-    val schedulerRule = RxSchedulerRule()
-
     private fun viewUpdater():SplashViewUpdater = SplashViewUpdater()
 
     private fun mainActivity(): MainActivity {

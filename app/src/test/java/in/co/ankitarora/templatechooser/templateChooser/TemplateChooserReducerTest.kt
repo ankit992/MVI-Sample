@@ -27,7 +27,7 @@ class TemplateChooserReducerTest {
         assertEquals(nextState.templateChooserScreen, nextState.currentScreen)
         val actionList = nextState.actions.toList()
         assertEquals(1, actionList.blockingGet().count())
-        Assert.assertTrue(actionList.blockingGet().find { action -> action.equals(Action.ShowCurrentScreen) } != null)
+        Assert.assertTrue(actionList.blockingGet().find { action -> action == Action.ShowCurrentScreen } != null)
     }
 
     @Test
@@ -37,7 +37,7 @@ class TemplateChooserReducerTest {
         assertEquals(nextState.templateChooserScreen, nextState.currentScreen)
         val actionList = nextState.actions.toList()
         assertEquals(1, actionList.blockingGet().count())
-        Assert.assertTrue(actionList.blockingGet().find { action -> action.equals(Action.GetTemplatesData) } != null)
+        Assert.assertTrue(actionList.blockingGet().find { action -> action == Action.GetTemplatesData } != null)
     }
 
     @Test
@@ -47,7 +47,7 @@ class TemplateChooserReducerTest {
         assertEquals(nextState.templateChooserScreen, nextState.currentScreen)
         val actionList = nextState.actions.toList()
         assertEquals(1, actionList.blockingGet().count())
-        Assert.assertTrue(actionList.blockingGet().find { action -> action.equals(Action.ShowErrorScreen) } != null)
+        Assert.assertTrue(actionList.blockingGet().find { action -> action == Action.ShowErrorScreen } != null)
     }
 
     @Test
@@ -57,7 +57,7 @@ class TemplateChooserReducerTest {
         assertEquals(nextState.templateChooserScreen, nextState.currentScreen)
         val actionList = nextState.actions.toList()
         assertEquals(1, actionList.blockingGet().count())
-        Assert.assertTrue(actionList.blockingGet().find { action -> action.equals(Action.TemplateDataLoaded(listOf())) } != null)
+        Assert.assertTrue(actionList.blockingGet().find { action -> action == Action.TemplateDataLoaded(listOf()) } != null)
     }
 
     @Test
