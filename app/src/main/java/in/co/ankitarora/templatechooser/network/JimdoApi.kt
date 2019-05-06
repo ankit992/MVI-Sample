@@ -2,7 +2,6 @@ package `in`.co.ankitarora.templatechooser.network
 
 import `in`.co.ankitarora.templatechooser.kotlin_data.TemplateDetails
 import android.annotation.SuppressLint
-import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,18 +19,6 @@ interface JimdoApi {
     @Headers("Accept:application/json")
     fun getDataPerDesign(@Url path: String): Observable<TemplateDetails>
 }
-
-
-//@SuppressLint("CheckResult")
-//fun main() {
-//    getAllTemplates().subscribeOn(Schedulers.trampoline()).observeOn(Schedulers.trampoline()).doOnComplete {
-//        Log.d("OnNext", "knknk")
-//    }.doOnNext {
-//        Log.d("OnNext", "knknk")
-//    }.subscribe {
-//        Log.d("adasd", "asdsa")
-//    }
-//}
 
 @SuppressLint("CheckResult")
 fun getAllTemplates(): Observable<List<TemplateDetails>> {

@@ -51,7 +51,7 @@ class TemplateChooserReducerTest {
     }
 
     @Test
-    fun itShouldShowTemplatesfTemplateDataLoaded() {
+    fun itShouldShowTemplatesIfTemplateDataLoaded() {
         val reducer = reducer()
         val nextState = reducer.reduce(initialState(), Event.TemplateDataLoaded(listOf()))
         assertEquals(nextState.templateChooserScreen, nextState.currentScreen)

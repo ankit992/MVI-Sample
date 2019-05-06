@@ -1,10 +1,12 @@
 package `in`.co.ankitarora.templatechooser.splash
 
-import `in`.co.ankitarora.templatechooser.*
+import `in`.co.ankitarora.templatechooser.Action
+import `in`.co.ankitarora.templatechooser.MainActivity
+import `in`.co.ankitarora.templatechooser.Screen
+import `in`.co.ankitarora.templatechooser.State
 import android.view.View
 import io.reactivex.Observable
 import org.junit.Assert
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito

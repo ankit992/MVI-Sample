@@ -2,4 +2,6 @@
     <string name="app_name">TemplateChooser</string>
     <string name="retry">Retry</string>
     <string name="image_of_template">Image of Template</string>
+    <string name="default_selector_color">#ffffff</string>
+    <string name="go_to_templatechooser">Go To TemplateChooser</string>
 </resources>

@@ -63,11 +63,11 @@ class TemplatesPagerAdapter(private val context: Context, private val templateDe
                 when (selectedVariantPosition) {
                     index -> it.setState(
                         listOfTemplateData[position].value.variations[index].getIconColor(),
-                        CircleButtonView.ButtonState.SELECTED
+                        CircleButtonView.ButtonState.Selected
                     )
                     else -> it.setState(
                         listOfTemplateData[position].value.variations[index].getIconColor(),
-                        CircleButtonView.ButtonState.NOT_SELECTED
+                        CircleButtonView.ButtonState.NotSelected
                     )
                 }
                 it.setOnClickListener {

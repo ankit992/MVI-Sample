@@ -10,6 +10,6 @@
             android:id="@+id/button_template_chooser"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-            android:text="Go To TemplateChooser"
+            android:text="@string/go_to_templatechooser"
     />
 </merge>

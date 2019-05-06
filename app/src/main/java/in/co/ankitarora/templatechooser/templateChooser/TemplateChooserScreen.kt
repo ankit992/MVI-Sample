@@ -4,8 +4,6 @@ import `in`.co.ankitarora.templatechooser.Event
 import `in`.co.ankitarora.templatechooser.Reducer
 import `in`.co.ankitarora.templatechooser.Screen
 import `in`.co.ankitarora.templatechooser.ViewUpdater
-import `in`.co.ankitarora.templatechooser.splash.SplashViewEvents
-import `in`.co.ankitarora.templatechooser.splash.SplashViewUpdater
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View

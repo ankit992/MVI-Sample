@@ -4,11 +4,8 @@ import `in`.co.ankitarora.templatechooser.*
 import `in`.co.ankitarora.templatechooser.kotlin_data.TemplateDetails
 import android.view.View
 import io.reactivex.Observable
-import io.reactivex.observers.TestObserver
 import io.reactivex.subjects.PublishSubject
-import org.junit.Assert
 import org.junit.Assert.assertEquals
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito

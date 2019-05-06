@@ -27,7 +27,7 @@ class SplashReducerTest {
         Assert.assertEquals(nextState.splashScreen, nextState.currentScreen)
         val actionList = nextState.actions.toList()
         Assert.assertEquals(1, actionList.blockingGet().count())
-        Assert.assertTrue(actionList.blockingGet().find { action -> action.equals(Action.ShowCurrentScreen) } != null)
+        Assert.assertTrue(actionList.blockingGet().find { action -> action == Action.ShowCurrentScreen } != null)
     }
 
     @Test

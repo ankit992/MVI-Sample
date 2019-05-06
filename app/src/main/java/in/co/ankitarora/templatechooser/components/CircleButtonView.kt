@@ -1,5 +1,6 @@
 package `in`.co.ankitarora.templatechooser.components
 
+import `in`.co.ankitarora.templatechooser.R
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -8,11 +9,11 @@ import android.util.AttributeSet
 import android.view.View
 
 
-class CircleButtonView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+class CircleButtonView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private val paint: Paint = Paint()
-    private var color: String = "#ffffff"
+    private var color: String = context.getString(R.string.default_selector_color)
     private var buttonState: ButtonState =
-        ButtonState.NOT_SELECTED
+        ButtonState.NotSelected
     fun setState(color: String, buttonState: ButtonState) {
         this.color = color
         this.buttonState = buttonState
@@ -26,18 +27,16 @@ class CircleButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
         val y = height
         val radius = 40
         when (buttonState) {
-            ButtonState.SELECTED -> paint.style = Paint.Style.FILL_AND_STROKE
-            ButtonState.NOT_SELECTED -> paint.style = Paint.Style.STROKE
+            ButtonState.Selected -> paint.style = Paint.Style.FILL_AND_STROKE
+            ButtonState.NotSelected -> paint.style = Paint.Style.STROKE
         }
-//        paint.color = Color.parseColor(color)
-//        canvas.drawPaint(paint)
         paint.strokeWidth = 4f
         paint.color = Color.parseColor(this.color)
         canvas.drawCircle(x / 2f, y / 2f, radius.toFloat(), paint)
     }
 
     sealed class ButtonState {
-        object SELECTED : ButtonState()
-        object NOT_SELECTED : ButtonState()
+        object Selected : ButtonState()
+        object NotSelected : ButtonState()
     }
 }
