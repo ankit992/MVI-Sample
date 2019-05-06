@@ -20,14 +20,25 @@ class TemplateChooserViewUpdater : ViewUpdater {
                 Action.ShowCurrentScreen -> {
                     rootView.updateView(state.currentScreen.buildView(rootView.getContext()))
                 }
-                Action.GetTemplatesData -> rootView.getTemplatesData()
-                    .doOnNext {
-                        events.onNext(Event.TemplateDataLoaded(it))
-                    }
-                    .doOnError {
-                        events.onNext(Event.OnTemplateLoadError)
-                        it.printStackTrace()
-                    }.subscribe()
+                Action.GetTemplatesData -> {
+                    rootView.showProgressBar()
+                    rootView.getTemplatesData()
+                        .doOnNext {
+                            events.onNext(Event.TemplateDataLoaded(it))
+                        }
+                        .doOnError {
+                            events.onNext(Event.OnTemplateLoadError)
+                            it.printStackTrace()
+                        }.subscribe()
+                }
+                Action.ShowErrorScreen -> {
+                    rootView.hideProgressBar()
+                    (rootView.currentView() as TemplateChooserViewInterface).showRetryButton()
+                }
+                is Action.TemplateDataLoaded -> {
+                    rootView.hideProgressBar()
+                    ((rootView.currentView()) as TemplateChooserViewInterface).showTemplates(action.templateDetails)
+                }
             }
         }
     }

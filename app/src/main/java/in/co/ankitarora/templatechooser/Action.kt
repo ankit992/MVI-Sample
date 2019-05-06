@@ -7,5 +7,5 @@ interface Action {
 
     object ShowCurrentScreen: Action
     object GetTemplatesData : Action
-    object OnTemplateDataLoadError : Action
+    object ShowErrorScreen : Action
 }

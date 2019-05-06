@@ -12,6 +12,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RootView {
+    override fun hideProgressBar() {
+        in_progress.visibility = View.GONE
+    }
+
     override fun getTemplatesData(): Observable<List<TemplateDetails>> = getAllTemplates()
 
     override fun showProgressBar() {

@@ -16,8 +16,15 @@ data class Variation(
     @SerializedName("icon") val icon: String,
     @SerializedName("icon-type") val iconType: String,
     @SerializedName("screenshots") val screenshotLinks: ScreenshotLinks
-)
+) {
+    fun getIconColor(): String {
+        return if (icon.length == 4)
+            icon + icon.substring(1)
+        else
+            icon
+    }
+}
 
-data class ScreenshotLinks(@SerializedName("medium") val medium: String)
+data class ScreenshotLinks(@SerializedName("iphone") val iphone: String)
 
 data class TemplateMeta(@SerializedName("color") val color: String)

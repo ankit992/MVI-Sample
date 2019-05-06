@@ -37,4 +37,13 @@ class SplashReducerTest {
         Assert.assertEquals(nextState.templateChooserScreen, nextState.currentScreen)
     }
 
+    @Test
+    fun itShouldReturnZeroActionsIfUnsupportedEventSent() {
+        val reducer = reducer()
+        val nextState = reducer.reduce(initialState(), Event.OnTemplateLoadError)
+        Assert.assertEquals(nextState.splashScreen, nextState.currentScreen)
+        val actionList = nextState.actions.toList()
+        Assert.assertEquals(0, actionList.blockingGet().count())
+    }
+
 }

@@ -11,4 +11,5 @@ interface RootView {
     fun currentView(): View
     fun showProgressBar()
     fun getTemplatesData(): Observable<List<TemplateDetails>>
+    fun hideProgressBar()
 }

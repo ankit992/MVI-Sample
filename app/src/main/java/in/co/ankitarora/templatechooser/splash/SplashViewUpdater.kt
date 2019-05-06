@@ -20,9 +20,6 @@ class SplashViewUpdater : ViewUpdater {
                 Action.ShowCurrentScreen -> {
                     rootView.updateView(state.currentScreen.buildView(rootView.getContext()))
                 }
-                Action.GetTemplatesData -> {
-                    rootView.showProgressBar()
-                }
             }
         }
     }

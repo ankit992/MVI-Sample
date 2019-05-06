@@ -3,9 +3,27 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center"
-              android:gravity="center"
-              android:text="Hello Template Chooser"/>
+    <FrameLayout android:id="@+id/layout_retry"
+                 android:visibility="gone"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/retry"
+                android:id="@+id/button_retry"
+        />
+    </FrameLayout>
+    <RelativeLayout
+            android:id="@+id/templates_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <androidx.viewpager.widget.ViewPager android:id="@+id/template_details_view_pager"
+                                             android:paddingStart="@dimen/dimen_30dp"
+                                             android:paddingEnd="@dimen/dimen_30dp"
+                                             android:clipToPadding="false"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"/>
+
+    </RelativeLayout>
 </LinearLayout>

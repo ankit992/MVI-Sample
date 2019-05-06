@@ -11,7 +11,7 @@ class TemplateChooserReducer : Reducer {
         return when (event) {
             is Event.LoadData -> state.copy(actions = Observable.just(Action.ShowCurrentScreen))
             is Event.GetTemplateData -> state.copy(actions = Observable.just(Action.GetTemplatesData))
-            is Event.OnTemplateLoadError -> state.copy(actions = Observable.just(Action.OnTemplateDataLoadError))
+            is Event.OnTemplateLoadError -> state.copy(actions = Observable.just(Action.ShowErrorScreen))
             is Event.TemplateDataLoaded -> state.copy(actions = Observable.just(Action.TemplateDataLoaded(event.templateDetails)))
             else -> state
         }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TemplateChooser</string>
+    <string name="retry">Retry</string>
+    <string name="image_of_template">Image of Template</string>
 </resources>
