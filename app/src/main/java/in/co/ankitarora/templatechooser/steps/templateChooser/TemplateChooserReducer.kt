@@ -1,4 +1,4 @@
-package `in`.co.ankitarora.templatechooser.templateChooser
+package `in`.co.ankitarora.templatechooser.steps.templateChooser
 
 import `in`.co.ankitarora.templatechooser.Action
 import `in`.co.ankitarora.templatechooser.Event

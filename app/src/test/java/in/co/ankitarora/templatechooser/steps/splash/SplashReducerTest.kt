@@ -1,9 +1,9 @@
-package `in`.co.ankitarora.templatechooser.splash
+package `in`.co.ankitarora.templatechooser.steps.splash
 
 import `in`.co.ankitarora.templatechooser.Action
 import `in`.co.ankitarora.templatechooser.Event
 import `in`.co.ankitarora.templatechooser.State
-import `in`.co.ankitarora.templatechooser.templateChooser.TemplateChooserScreen
+import `in`.co.ankitarora.templatechooser.steps.templateChooser.TemplateChooserScreen
 import org.junit.Assert
 import org.junit.Test
 

@@ -51,10 +51,16 @@ ext {
     junitVersion = '4.12'
     robloelectricVersion = '4.1'
     mockitoVersion = '2.27.0'
+    pactVersion = '3.6.1'
 
     //acceptance test libs
     espressoCoreVersion = '3.2.0-alpha05'
     espressoTestRunnerVersion = '1.2.0-alpha05'
+    espressoIdlingResourceVersion = '3.1.1'
+    testRulesVersion = '1.1.0'
+    cucumberAndroidVersion = '1.2.5'
+    cucumberPicoContainerVersion = '1.2.5'
+    cucumberJvmDepsVersion = '1.0.5'
 
     libraries = [
             kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
@@ -73,13 +79,22 @@ ext {
     ]
 
     testLibraries = [
-            junit       : "junit:junit:${junitVersion}",
-            roboelectric: "org.robolectric:robolectric:${robloelectricVersion}",
-            mockito     : "org.mockito:mockito-core:${mockitoVersion}",
+            junit            : "junit:junit:${junitVersion}",
+            roboelectric     : "org.robolectric:robolectric:${robloelectricVersion}",
+            mockito          : "org.mockito:mockito-core:${mockitoVersion}",
+            pactConsumerJunit: "au.com.dius:pact-jvm-consumer-junit_2.12:$pactVersion",
+            pactConsumerJava8: "au.com.dius:pact-jvm-consumer-java8_2.12:$pactVersion",
     ]
 
     acceptanceTestLibraries = [
             androidTestEspresso      : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
-            androidTestEspressoRunner: "androidx.test:runner:$espressoTestRunnerVersion"
+            androidTestEspressoRunner: "androidx.test:runner:$espressoTestRunnerVersion",
+            testRules                : "androidx.test:rules:$testRulesVersion",
+            cucumberAndroid          : "info.cukes:cucumber-android:$cucumberAndroidVersion",
+            cucumberPicoContainer    : "info.cukes:cucumber-picocontainer:$cucumberPicoContainerVersion",
+            cucumberJvmDeps          : "info.cukes:cucumber-jvm-deps:$cucumberJvmDepsVersion",
+            espressoIdlingResource   : "androidx.test.espresso.idling:idling-net:$espressoIdlingResourceVersion"
     ]
+
+
 }

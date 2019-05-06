@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    testBuildType "qa"
     compileSdkVersion 28
     defaultConfig {
         applicationId "in.co.ankitarora.templatechooser"
@@ -12,12 +13,16 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "in.co.ankitarora.templatechooser.test.CucumberTestRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        qa {
+            initWith debug
+            versionNameSuffix "-qa"
         }
     }
 
@@ -56,9 +61,29 @@ dependencies {
     testImplementation testLibraries.junit
     testImplementation testLibraries.roboelectric
     testImplementation testLibraries.mockito
+    testImplementation testLibraries.pactConsumerJunit
+    testImplementation testLibraries.pactConsumerJava8
 
     def acceptanceTestLibraries = rootProject.ext.acceptanceTestLibraries
 
     androidTestImplementation acceptanceTestLibraries.androidTestEspresso
     androidTestImplementation acceptanceTestLibraries.androidTestEspressoRunner
+    androidTestImplementation acceptanceTestLibraries.testRules
+    androidTestImplementation acceptanceTestLibraries.cucumberAndroid
+    androidTestImplementation acceptanceTestLibraries.cucumberPicoContainer
+    androidTestImplementation acceptanceTestLibraries.cucumberJvmDeps
+
+}
+
+gradle.taskGraph.afterTask { task, state ->
+    if ((task == connectedAndroidTest) || (task == connectedQaAndroidTest) || (task == connectedCheck)) {
+        def reportDir = new File(project.buildDir, "cucumber-reports")
+        if (!reportDir.exists()) {
+            reportDir.mkdirs()
+        }
+        println 'Retrieving Cucumber test report to ' + project.buildDir
+        def processBuilder = new ProcessBuilder(
+                ['adb', 'pull', "/mnt/sdcard/cucumber-reports/", reportDir.getAbsolutePath()])
+        processBuilder.start()
+    }
 }

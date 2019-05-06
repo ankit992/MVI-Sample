@@ -1,4 +1,4 @@
-package `in`.co.ankitarora.templatechooser.splash
+package `in`.co.ankitarora.templatechooser.steps.splash
 
 import `in`.co.ankitarora.templatechooser.Event
 import `in`.co.ankitarora.templatechooser.Reducer

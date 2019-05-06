@@ -1,7 +1,7 @@
 package `in`.co.ankitarora.templatechooser
 
 import `in`.co.ankitarora.templatechooser.kotlin_data.TemplateDetails
-import `in`.co.ankitarora.templatechooser.templateChooser.TemplateChooserViewInterface
+import `in`.co.ankitarora.templatechooser.steps.templateChooser.TemplateChooserViewInterface
 import android.content.Context
 import android.view.View
 

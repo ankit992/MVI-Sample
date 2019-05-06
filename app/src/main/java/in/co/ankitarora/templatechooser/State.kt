@@ -1,7 +1,7 @@
 package `in`.co.ankitarora.templatechooser
 
-import `in`.co.ankitarora.templatechooser.splash.SplashScreen
-import `in`.co.ankitarora.templatechooser.templateChooser.TemplateChooserScreen
+import `in`.co.ankitarora.templatechooser.steps.splash.SplashScreen
+import `in`.co.ankitarora.templatechooser.steps.templateChooser.TemplateChooserScreen
 import io.reactivex.Observable
 
 data class State(val currentScreen:Screen = SplashScreen(),
