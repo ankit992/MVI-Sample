@@ -61,6 +61,7 @@ ext {
     cucumberAndroidVersion = '1.2.5'
     cucumberPicoContainerVersion = '1.2.5'
     cucumberJvmDepsVersion = '1.0.5'
+    idlingResourceConcurrentVersion = '3.2.0-alpha05'
 
     libraries = [
             kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
@@ -93,7 +94,8 @@ ext {
             cucumberAndroid          : "info.cukes:cucumber-android:$cucumberAndroidVersion",
             cucumberPicoContainer    : "info.cukes:cucumber-picocontainer:$cucumberPicoContainerVersion",
             cucumberJvmDeps          : "info.cukes:cucumber-jvm-deps:$cucumberJvmDepsVersion",
-            espressoIdlingResource   : "androidx.test.espresso.idling:idling-net:$espressoIdlingResourceVersion"
+            espressoIdlingResource   : "androidx.test.espresso.idling:idling-net:$espressoIdlingResourceVersion",
+            idlingResourceConcurrent:  "androidx.test.espresso.idling:idling-concurrent:$idlingResourceConcurrentVersion",
     ]
 
 

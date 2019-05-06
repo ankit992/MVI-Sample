@@ -22,9 +22,11 @@ interface JimdoApi {
 
 @SuppressLint("CheckResult")
 fun getAllTemplates(): Observable<List<TemplateDetails>> {
+    val restClient = RestClient()
+        .getRetrofitClient().create(JimdoApi::class.java)
+
     val templatesObservable = PublishSubject.create<List<TemplateDetails>>()
-    RestClient()
-        .getRetrofitClient().create(JimdoApi::class.java).getPublishedTemplateList().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    restClient.getPublishedTemplateList().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
         .doOnError {
             templatesObservable.onError(it)
         }
@@ -32,7 +34,7 @@ fun getAllTemplates(): Observable<List<TemplateDetails>> {
             val listOfTemplateObservables = mutableListOf<Observable<TemplateDetails>>()
             listOfTemplates.map {
                 listOfTemplateObservables.add(
-                    RestClient().getRetrofitClient().create(JimdoApi::class.java).getDataPerDesign(
+                    restClient.getDataPerDesign(
                         it
                     )
                 )
