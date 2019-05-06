@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.0'
@@ -19,7 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
@@ -28,22 +28,58 @@ task clean(type: Delete) {
 }
 
 ext {
-    rxJavaVersion = '2.1.3'
+    //coding libs
+    rxKotlinVersion = '2.3.0'
+    rxAndroidVersion = '2.1.1'
+    androidKtxVersion = '1.0.1'
+
+    //image libs
+    picassoVersion = '2.5.2'
+    picassoOkhttpDownloaderVersion = '1.1.0'
+
+    // network libs
+    retrofitVersion = '2.5.0'
+    retrofitRxJavaAdapterVersion = '2.5.0'
+    retrofitGsonConverterVersion = '2.5.0'
+
+    //ui libs
+    cardViewVersion = '1.0.0'
+    appCompatVersion = '1.0.2'
+    constraintLayoutVersion = '1.1.3'
+
+    //unit test libs
     junitVersion = '4.12'
-    espressoCoreVersion = '2.2.2'
     robloelectricVersion = '4.1'
+    mockitoVersion = '2.27.0'
+
+    //acceptance test libs
+    espressoCoreVersion = '3.2.0-alpha05'
+    espressoTestRunnerVersion = '1.2.0-alpha05'
 
     libraries = [
-            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
-            rxJava        : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            rxKotlin              : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
+            rxAndroid             : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            androidCoreKtx        : "androidx.core:core-ktx:$androidKtxVersion",
+            picasso               : "com.squareup.picasso:picasso:$picassoVersion",
+            picassoOkttpDownloader: "com.jakewharton.picasso:picasso2-okhttp3-downloader:$picassoOkhttpDownloaderVersion",
+            retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGsonConverter : "com.squareup.retrofit2:converter-gson:$retrofitGsonConverterVersion",
+            cardView              : "androidx.cardview:cardview:$cardViewVersion",
+            appCompat             : "androidx.appcompat:appcompat:$appCompatVersion",
+            retrofitRxJavaAdapter : "com.squareup.retrofit2:adapter-rxjava2:$retrofitRxJavaAdapterVersion",
+            constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            kotlinLang            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     ]
 
     testLibraries = [
             junit       : "junit:junit:${junitVersion}",
             roboelectric: "org.robolectric:robolectric:${robloelectricVersion}",
+            mockito     : "org.mockito:mockito-core:${mockitoVersion}",
     ]
 
     acceptanceTestLibraries = [
-            androidTestEspresso: "com.android.support.test.espresso:espresso-core:$espressoCoreVersion"
+            androidTestEspresso      : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            androidTestEspressoRunner: "androidx.test:runner:$espressoTestRunnerVersion"
     ]
 }
