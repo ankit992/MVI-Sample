@@ -1,6 +1,7 @@
 package `in`.co.ankitarora.templatechooser.steps.templateChooser
 
 import `in`.co.ankitarora.templatechooser.*
+import `in`.co.ankitarora.templatechooser.UriIdlingResourceSingleton.uriIdlingResource
 import android.annotation.SuppressLint
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,6 +23,7 @@ class TemplateChooserViewUpdater : ViewUpdater {
                 }
                 Action.GetTemplatesData -> {
                     rootView.showProgressBar()
+                    uriIdlingResource.beginLoad("https://uri")
                     rootView.getTemplatesData()
                         .doOnNext {
                             events.onNext(Event.TemplateDataLoaded(it))
@@ -32,10 +34,12 @@ class TemplateChooserViewUpdater : ViewUpdater {
                         }.subscribe()
                 }
                 Action.ShowErrorScreen -> {
+                    uriIdlingResource.endLoad("https://uri")
                     rootView.hideProgressBar()
                     (rootView.currentView() as TemplateChooserViewInterface).showRetryButton()
                 }
                 is Action.TemplateDataLoaded -> {
+                    uriIdlingResource.endLoad("https://uri")
                     rootView.hideProgressBar()
                     ((rootView.currentView()) as TemplateChooserViewInterface).showTemplates(action.templateDetails)
                 }

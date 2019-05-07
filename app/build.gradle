@@ -73,6 +73,8 @@ dependencies {
     androidTestImplementation acceptanceTestLibraries.cucumberPicoContainer
     androidTestImplementation acceptanceTestLibraries.cucumberJvmDeps
 
+    api 'androidx.test.espresso.idling:idling-net:3.1.1'
+
     //TODO should be only for 1 build variant [Test], as we'll be adding code to our builds
     implementation acceptanceTestLibraries.idlingResourceConcurrent
     implementation ('com.jakewharton.espresso:okhttp3-idling-resource:1.0.0') {

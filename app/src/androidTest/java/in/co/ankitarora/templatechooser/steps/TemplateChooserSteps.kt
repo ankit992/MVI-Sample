@@ -13,4 +13,9 @@ class TemplateChooserSteps(private val templateChooserTestScreen: TemplateChoose
     fun i_should_see_sliding_view_pager_view(){
         templateChooserTestScreen.validateTemplateChooserView()
     }
+
+    @Then("The ViewPager should have 40 items in it")
+    fun the_viewpager_should_have_40_items_in_it(){
+        templateChooserTestScreen.validateNumberOfItemsInViewPager(40)
+    }
 }
