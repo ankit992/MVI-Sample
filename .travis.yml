@@ -19,7 +19,16 @@ android:
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-x86-android-28
+    - sys-img-armeabi-v7a-android-21
+
+before_script:
+  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
 jobs:
   include:
-    - stage: Test
+    - stage: Unit Test
       script: ./gradlew testQaUnitTest
+    - stage: UI Test
+      script: ./gradlew connectedQaAndroidTest
