@@ -1,4 +1,9 @@
 # MVI-Sample
+
+### Travis build Status
+[![Build Status](https://api.travis-ci.org/ankit992/MVI-Sample.png)](https://travis-ci.org/ankit992/MVI-Sample)
+
+
 ### UI Tests
 1. Switch to QA build variant from build variants option 
 2. Add a new Build Configuration for Instrumentation tests which include all modules 
