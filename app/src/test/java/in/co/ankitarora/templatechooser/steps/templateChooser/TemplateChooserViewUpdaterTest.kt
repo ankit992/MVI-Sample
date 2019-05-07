@@ -15,7 +15,7 @@ import org.robolectric.RuntimeEnvironment
 import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
-class TemplateChooserViewUpdaterTest{
+class TemplateChooserViewUpdaterTest {
 
     private fun viewUpdater(): TemplateChooserViewUpdater = TemplateChooserViewUpdater()
 
@@ -23,13 +23,13 @@ class TemplateChooserViewUpdaterTest{
         return Robolectric.setupActivity(MainActivity::class.java)
     }
 
-    private fun rootView(): RootView{
+    private fun rootView(): RootView {
         return Mockito.mock(RootView::class.java)
     }
 
 
     @Test
-    fun showCurrentScreenShouldBuildTheViewAndAddItToActivity(){
+    fun showCurrentScreenShouldBuildTheViewAndAddItToActivity() {
         val mockScreen = Mockito.mock(Screen::class.java)
         val activity = mainActivity()
         val viewUpdater = viewUpdater()
@@ -41,32 +41,49 @@ class TemplateChooserViewUpdaterTest{
     }
 
     @Test
-    fun itShouldShowErrorScreen(){
+    fun itShouldShowErrorScreen() {
         val mockRootView = rootView()
         val viewUpdater = viewUpdater()
         val mockCurrentView = Mockito.mock(TestView::class.java)
+        //TODO: QuickFix for handling Idling resource
+        val stateToManage =
+            State(currentScreen = TemplateChooserScreen(), actions = Observable.just(Action.GetTemplatesData))
+        viewUpdater.update(stateToManage, mockRootView)
+        //end of Quickfix
         Mockito.`when`(mockRootView.currentView()).thenReturn(mockCurrentView)
         val state = State(currentScreen = TemplateChooserScreen(), actions = Observable.just(Action.ShowErrorScreen))
-        viewUpdater.update(state,mockRootView)
+        viewUpdater.update(state, mockRootView)
         Mockito.verify(mockRootView).hideProgressBar()
         Mockito.verify(mockCurrentView).showRetryButton()
     }
 
     @Test
-    fun itShouldLoadTemplateData(){
+    fun itShouldLoadTemplateData() {
         val mockRootView = rootView()
         val viewUpdater = viewUpdater()
         val mockCurrentView = Mockito.mock(TestView::class.java)
+
+        //TODO: QuickFix for handling Idling resource
+        val stateToManage =
+            State(currentScreen = TemplateChooserScreen(), actions = Observable.just(Action.GetTemplatesData))
+        viewUpdater.update(stateToManage, mockRootView)
+        //end of Quickfix
         Mockito.`when`(mockRootView.currentView()).thenReturn(mockCurrentView)
-        val state = State(currentScreen = TemplateChooserScreen(), actions = Observable.just(Action.TemplateDataLoaded(
-            listOf())))
-        viewUpdater.update(state,mockRootView)
+        val state = State(
+            currentScreen = TemplateChooserScreen(), actions = Observable.just(
+                Action.TemplateDataLoaded(
+                    listOf()
+                )
+            )
+        )
+        viewUpdater.update(state, mockRootView)
         Mockito.verify(mockRootView).hideProgressBar()
         Mockito.verify(mockCurrentView).showTemplates(listOf())
+
     }
 
     @Test
-    fun itShouldCallBackendToLoadTemplates(){
+    fun itShouldCallBackendToLoadTemplates() {
         val mockRootView = rootView()
         val viewUpdater = viewUpdater()
         val mockCurrentView = Mockito.mock(TestView::class.java)
@@ -74,7 +91,7 @@ class TemplateChooserViewUpdaterTest{
         Mockito.`when`(mockRootView.getTemplatesData()).thenReturn(testObserver)
         Mockito.`when`(mockRootView.currentView()).thenReturn(mockCurrentView)
         val state = State(currentScreen = TemplateChooserScreen(), actions = Observable.just(Action.GetTemplatesData))
-        viewUpdater.update(state,mockRootView)
+        viewUpdater.update(state, mockRootView)
         Mockito.verify(mockRootView).showProgressBar()
         Mockito.verify(mockRootView).getTemplatesData()
 
@@ -86,7 +103,7 @@ class TemplateChooserViewUpdaterTest{
             testObserver.onNext(listOf())
         }.timeout(5, TimeUnit.SECONDS).blockingFirst()
             .let {
-                assertEquals(it,Event.TemplateDataLoaded(listOf()))
+                assertEquals(it, Event.TemplateDataLoaded(listOf()))
             }
 
         Observable.create<Event> { emitter ->
@@ -97,7 +114,7 @@ class TemplateChooserViewUpdaterTest{
             testObserver.onError(IndexOutOfBoundsException())
         }.timeout(5, TimeUnit.SECONDS).blockingFirst()
             .let {
-                assertEquals(it,Event.OnTemplateLoadError)
+                assertEquals(it, Event.OnTemplateLoadError)
             }
 
     }
